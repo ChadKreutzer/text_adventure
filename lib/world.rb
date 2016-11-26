@@ -1,29 +1,49 @@
 # Define the World
 class World
-  WORLD_WIDTH = 10
-  WORLD_HEIGHT = 10
+  WORLD_WIDTH = rand(50)
+  WORLD_HEIGHT = rand(50)
 
   def initialize
-    @rooms = Array.new(WORLD_HEIGHT, Array.new(WORLD_WIDTH))
+    @rooms = Array.new(WORLD_HEIGHT) { Array.new(WORLD_WIDTH) { Room.new } }
   end
 
   def move_entity_north(entity)
-    entity.y_coord -= 1 if entity.y_coord > 0
+    if entity.y_coord > 0
+      entity.y_coord -= 1
+    else
+      world_edge
+    end
   end
 
   def move_entity_south(entity)
-    entity.y_coord += 1 if entity.y_coord < WORLD_HEIGHT - 1
+    if entity.y_coord < WORLD_HEIGHT - 1
+      entity.y_coord += 1
+    else
+      world_edge
+    end
   end
 
   def move_entity_east(entity)
-    entity.x_coord += 1 if entity.x_coord < WORLD_HEIGHT - 1
+    if entity.x_coord < WORLD_HEIGHT - 1
+      entity.x_coord += 1
+    else
+      world_edge
+    end
   end
 
   def move_entity_west(entity)
-    entity.x_coord -= 1 if entity.x_coord > 0
+    if entity.x_coord > 0
+      entity.x_coord -= 1
+    else
+      world_edge
+    end
   end
 
   def get_room_of(entity)
-    @rooms[entity.x_coord][entity.y_coord] || Room.new
+    @rooms[entity.x_coord][entity.y_coord]
+  end
+
+  def world_edge
+    puts "You can't go that direction"
   end
 end

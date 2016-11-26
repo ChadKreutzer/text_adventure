@@ -3,10 +3,12 @@ require_relative 'combatable'
 class Monster
   include Combatable
 
-  MAX_HIT_POINTS = 10
+  MAX_HIT_POINTS = rand(10..50)
+  ATTACK_POWER = rand(10)
 
   def initialize
-    initialize_stats(BASE_STATS.merge(max_hit_points: MAX_HIT_POINTS))
+    initialize_stats(BASE_STATS.merge(max_hit_points: MAX_HIT_POINTS,
+                                      attack_power: ATTACK_POWER))
   end
 
   def to_s

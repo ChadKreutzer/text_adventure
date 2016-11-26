@@ -23,7 +23,6 @@ class Game
 
       action = take_player_input
       next unless ACTIONS.include? action
-
       take_action(action)
     end
   end
@@ -37,7 +36,11 @@ class Game
     puts "You are at map coordinates [#{@player.x_coord}, #{@player.y_coord}]"
 
     puts @current_room
-    puts "You see #{@current_room.content}." if @current_room.content
+    if @current_room.content
+      puts "You see #{@current_room.content}."
+    else
+      puts 'You see nothing'
+    end
   end
 
   def take_action(action)
@@ -66,8 +69,8 @@ class Game
     end
   end
 
-  def status_update(asses)
-    asses == :look ? print_status : @player.print_status
+  def status_update(assess)
+    assess == :look ? print_status : @player.print_status
   end
 end
 
