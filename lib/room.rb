@@ -3,16 +3,14 @@ class Room
   attr_accessor :size, :content
 
   def initialize
-    @content = get_content
-    @size = get_size
-    @adjective = get_adjective
+    @content = contents
+    @size = sizes
+    @adjective = adjectives
   end
 
   def interact(player)
-    if @content
-      @content.interact(player)
-      @content = nil
-    end
+    @content.interact(player) if @content
+    @content = nil
   end
 
   def to_s
@@ -21,15 +19,15 @@ class Room
 
   private
 
-  def get_content
+  def contents
     [Monster, Potion, Sword].sample.new
   end
 
-  def get_size
+  def sizes
     %w(small medium large).sample
   end
 
-  def get_adjective
+  def adjectives
     %w(pretty ugly hideous).sample
   end
 end

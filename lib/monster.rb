@@ -6,9 +6,7 @@ class Monster
   MAX_HIT_POINTS = 10
 
   def initialize
-    initialize_stats(BASE_STATS.merge ({
-      max_hit_points: MAX_HIT_POINTS
-    }))
+    initialize_stats(BASE_STATS.merge(max_hit_points: MAX_HIT_POINTS))
   end
 
   def to_s

@@ -4,7 +4,7 @@ Dir['lib/**.*'].each { |file| require_relative file }
 class Game
   ACTIONS = [
     :north, :east, :south, :west, :look, :fight, :take, :status, :quit
-  ]
+  ].freeze
 
   def initialize
     @world = World.new
@@ -42,8 +42,19 @@ class Game
 
   def take_action(action)
     case action
-    when :look
-      print_status
+    when :look, :status
+      status_update(action)
+    when :north, :south, :east, :west
+      move(action)
+    when :fight, :take
+      @current_room.interact(@player)
+    when :quit
+      exit
+    end
+  end
+
+  def move(direction)
+    case direction
     when :north
       @world.move_entity_north(@player)
     when :east
@@ -52,13 +63,11 @@ class Game
       @world.move_entity_south(@player)
     when :west
       @world.move_entity_west(@player)
-    when :fight, :take
-      @current_room.interact(@player)
-    when :status
-      @player.print_status
-    when :quit
-      exit
     end
+  end
+
+  def status_update(asses)
+    asses == :look ? print_status : @player.print_status
   end
 end
 

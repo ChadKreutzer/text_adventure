@@ -7,9 +7,7 @@ class Player
   MAX_HIT_POINTS = 100
 
   def initialize
-    initialize_stats(BASE_STATS.merge ({
-      max_hit_points: MAX_HIT_POINTS
-    }))
+    initialize_stats(BASE_STATS.merge(max_hit_points: MAX_HIT_POINTS))
     @x_coord = 0
     @y_coord = 0
   end
